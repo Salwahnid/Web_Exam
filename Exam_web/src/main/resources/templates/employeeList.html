@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Employee List</h1>
+    <a href="/employees/add" class="btn btn-primary mb-4">Add Employee</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Skills</th>
+            <th>Project</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.id}">1</td>
+            <td th:text="${employee.name}">John Doe</td>
+            <td th:text="${employee.email}">john.doe@example.com</td>
+            <td>
+                <ul>
+                    <li th:each="skill : ${employee.skills}" th:text="${skill}"></li>
+                </ul>
+            </td>
+            <td th:text="${employee.project.name}">Project A</td>
+            <td>
+                <a th:href="@{'/employees/delete/' + ${employee.id}}" class="btn btn-danger btn-sm">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrap.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
